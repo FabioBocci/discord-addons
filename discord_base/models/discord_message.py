@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Ygen. See LICENSE file for full copyright and licensing details.
 
 import requests
@@ -15,12 +14,12 @@ class DiscordMessage(models.Model):
     _description = "Discord Message"
     _order = "name desc, id desc"
 
-    name = fields.Char(string="Name", required=True, copy=False, readonly=True, index=True, default=lambda self: _('New'), track_visibility='onchange')
-    channel_id = fields.Many2one('discord.channel', string="Channel", index=True, help="Channel which gets the notification.", track_visibility="onchange", track_sequence=5)
-    member_id = fields.Many2one('discord.member', string="Member", index=True, help="User which gets the notification.", track_visibility="onchange", track_sequence=2)
-    guild_id = fields.Many2one('discord.guild', string="Guild", index=True, help="User which gets the notification.", track_visibility="onchange", track_sequence=8)
+    name = fields.Char(string="Name", required=True, copy=False, readonly=True, index=True, default=lambda self: _('New'), tracking=True)
+    channel_id = fields.Many2one('discord.channel', string="Channel", index=True, help="Channel which gets the notification.", tracking=True, track_sequence=5)
+    member_id = fields.Many2one('discord.member', string="Member", index=True, help="User which gets the notification.", tracking=True, track_sequence=2)
+    guild_id = fields.Many2one('discord.guild', string="Guild", index=True, help="User which gets the notification.", tracking=True, track_sequence=8)
     content = fields.Text(string="Content", help="Body or content of the notification.")
-    sent = fields.Boolean(string="Sent", default=False, store=True, track_visibility="onchange", copy=False)
+    sent = fields.Boolean(string="Sent", default=False, store=True, tracking=True, copy=False)
     message_id = fields.Char(string="Message Id", readonly=True, help="Discord message id", copy=False)
 
     @api.model

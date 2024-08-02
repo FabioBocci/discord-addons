@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Ygen. See LICENSE file for full copyright and licensing details.
 
 import logging
@@ -16,8 +15,8 @@ class DiscordGuild(models.Model):
     _description = "This is referred to as a server in the official Discord UI."
     _order = "display_name, id desc"
 
-    display_name = fields.Char(string="Name", help="Display name.", copy=False, index=True, track_visibility='onchange')
-    name = fields.Char(string="Discord Name", help="The guild name.", copy=False, readonly=True, index=True, track_visibility='onchange')
+    display_name = fields.Char(string="Name", help="Display name.", copy=False, index=True, tracking=True)
+    name = fields.Char(string="Discord Name", help="The guild name.", copy=False, readonly=True, index=True, tracking=True)
     description = fields.Text(string="Description", help="The guild’s description.", copy=False, readonly=True)
     discord_id = fields.Char(string="Server ID", required=True, help="The guild’s ID.", copy=False)
     category_ids = fields.One2many('discord.channel.category', 'guild_id', string='Categories', copy=False, readonly=True)

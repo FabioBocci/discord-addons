@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Ygen. See LICENSE file for full copyright and licensing details.
 
 {
@@ -7,7 +6,7 @@
         This module is a base module to provide foudation for building discord modules for Odoo.""",
     'description': """
         This module is a base module to provide foudation for building discord modules for Odoo.""",
-    'version': '12.0.1.0.0',
+    'version': "16.0.1.0.0",
     'license': 'OPL-1',
     'author': 'Bishal Pun, '
               'Ygen Software Pvt Ltd',

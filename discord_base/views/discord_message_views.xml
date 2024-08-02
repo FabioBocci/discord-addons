@@ -92,7 +92,6 @@
         <field name="name">Discord Notification</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">discord.message</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="discord_message_tree_view"/>
         <field name="search_view_id" ref="discord_message_search_view"/>
