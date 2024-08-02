@@ -28,7 +28,7 @@ class DiscordChannel(models.Model):
         "The mention must be unique"),
     ]
 
-    @api.multi
+
     def _sync_discord(self, vals):
         for record in self:
             record.write(vals[record.discord_id])
@@ -47,7 +47,7 @@ class DiscordChannelCategory(models.Model):
         'Active', default=True,
         help="If unchecked, it will allow you to hide the category without removing it.")
 
-    @api.multi
+
     def _sync_discord(self, vals):
         for record in self:
             record.write(vals[record.discord_id])

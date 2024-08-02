@@ -29,7 +29,7 @@ class DiscordUser(models.Model):
         ('mention_unique',
          'UNIQUE(mention)',
          "The mention of a user must be unique"),
-        
+
         ('name_unique',
          'UNIQUE(name)',
          "The username of a user must be unique"),
@@ -44,7 +44,7 @@ class DiscordMember(models.Model):
 
     guild_id = fields.Many2one('discord.guild', string="Guild", readonly=True, index=True, help="The guild the member belongs to.")
 
-    @api.multi
+
     def _sync_discord(self, vals):
         for record in self:
             record.write(vals[record.discord_id])

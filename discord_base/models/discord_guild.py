@@ -53,7 +53,6 @@ class DiscordGuild(models.Model):
             _logger.warning(e)
         return False
 
-    @api.multi
     def sync(self, auto_commit=False):
         for guild in self:
             if guild.token:
@@ -70,7 +69,7 @@ class DiscordGuild(models.Model):
                 channels_remote = guild.request_discord(channel_url)
                 if channels_remote:
                     guild._sync_channels(channels_remote)
-                
+
                 # sync channels
                 members_url = base_url + '/members'
                 members_remote = guild.request_discord(members_url, {'limit': 80})
@@ -82,7 +81,6 @@ class DiscordGuild(models.Model):
                 self._cr.commit()
         return True
 
-    @api.multi
     def _sync_guild(self, guild_remote):
         self.ensure_one()
         vals = {
@@ -90,8 +88,7 @@ class DiscordGuild(models.Model):
             'description': guild_remote['description']
         }
         self.write(vals)
-    
-    @api.multi
+
     def _sync_channels(self, channels_remote):
         self.ensure_one()
         channel_ids = []
@@ -131,11 +128,11 @@ class DiscordGuild(models.Model):
         categories = {}
         for categ in self.category_ids:
             categories[categ.discord_id] = categ.id
-        
+
         # Update category_id with real id
         for v in vals:
-            vals[v]['category_id'] = categories.get(vals[v]['category_id']) or None 
-        
+            vals[v]['category_id'] = categories.get(vals[v]['category_id']) or None
+
         # Sync channels
         existing_ids = []
         if self.text_channels:
@@ -145,8 +142,7 @@ class DiscordGuild(models.Model):
         Channel = self.env['discord.channel']
         for new_id in new_ids:
             Channel.create(vals[new_id])
-        
-    @api.multi
+
     def _sync_members(self, members_remote):
         self.ensure_one()
         member_ids = []
@@ -160,7 +156,7 @@ class DiscordGuild(models.Model):
                     'guild_id': self.id,
                     'discord_id': member['user']['id']
                 }
-        
+
         # Sync Members
         existing_ids = []
         if self.member_ids:

@@ -46,11 +46,11 @@ class DiscordMessage(models.Model):
             _logger.warning(e)
         return False
 
-    @api.multi
+
     def send(self):
         url = self.env['ir.config_parameter'].sudo().get_param('discord_api_url') or 'https://discord.com/api'
         url = url if url.endswith('/') else url + '/'
-        
+
         # Send Message to a Channel
         for record in self:
             base_url = ""
