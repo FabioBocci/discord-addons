@@ -55,7 +55,7 @@ class DiscordGuild(models.Model):
     def sync(self, auto_commit=False):
         for guild in self:
             if guild.token:
-                url = self.env['ir.config_parameter'].sudo().get_param('discord_api_url') or 'https://discord.com/api'
+                url = self.env['ir.config_parameter'].sudo().get_param('discord_api_url') or 'https://discord.com/api/v9/'
                 url = url if url.endswith('/') else url + '/'
                 # sync guild information
                 base_url = url + 'guilds/%s' % guild.discord_id
