@@ -144,24 +144,22 @@ class DiscordGuild(models.Model):
 
     def _sync_members(self, members_remote):
         self.ensure_one()
-        member_ids = []
         vals = {}
+
         for member in members_remote:
             if not member['user'].get('bot'):
-                member_ids.append(member['user']['id'])
                 vals[member['user']['id']] = {
                     'name': member['user']['username'],
+                    'display_name': member['user']['global_name'],
                     'discriminator': member['user']['discriminator'],
-                    'guild_id': self.id,
                     'discord_id': member['user']['id']
                 }
 
-        # Sync Members
-        existing_ids = []
-        if self.member_ids:
-            existing_ids = self.member_ids.mapped("discord_id")
-            self.member_ids._sync_discord(vals)
-        new_ids = list(set(member_ids) - set(existing_ids))
-        Member = self.env['discord.member']
-        for new in new_ids:
-            Member.create(vals[new])
+        users = self.env['discord.user'].UpdateOrCreate(vals)
+        members = self.env['discord.member'].UpdateOrCreate({
+            user.discord_id: {
+                'user_id': user.id,
+                'guild_id': self.id
+            }
+            for user in users
+        })

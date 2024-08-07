@@ -59,6 +59,7 @@ class DiscordMessage(models.Model):
                 data = {
                     'content': record.content,
                     'tts': False,
+                    "parse": ["users", "roles", "everyone"],
                 }
             if base_url:
                 message = record._send(base_url, data)
