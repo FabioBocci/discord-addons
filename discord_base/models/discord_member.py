@@ -74,7 +74,7 @@ class DiscordMember(models.Model):
         keys = vals.keys()
         Members = self.env[self._name]
         for member_key in keys:
-            member = self.search([('discord_id', '=', member_key)], limit=1)
+            member = self.search([('discord_id', '=', member_key), ("guild_id", "=", vals[member_key]["guild_id"])], limit=1)
             if member:
                 member.write(vals[member_key])
             else:

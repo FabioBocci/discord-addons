@@ -150,7 +150,7 @@ class DiscordGuild(models.Model):
             if not member['user'].get('bot'):
                 vals[member['user']['id']] = {
                     'name': member['user']['username'],
-                    'display_name': member['user']['global_name'],
+                    'display_name': member['user']['global_name'] or member['user']['username'],
                     'discriminator': member['user']['discriminator'],
                     'discord_id': member['user']['id']
                 }
