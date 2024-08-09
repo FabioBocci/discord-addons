@@ -32,6 +32,25 @@ class DiscordChannel(models.Model):
         for record in self:
             record.write(vals[record.discord_id])
 
+    def send_message(self, name: str, context: str, auto_delete: bool = False):
+        results = []
+        for record in self:
+            # create message
+            message = self.env['discord.message'].create({
+                'name': name,
+                "content": context,
+                "channel_id": record.id,
+                "guild_id": record.guild_id.id
+            })
+
+            message.send()
+            results += [message.message_id]
+
+            if auto_delete:
+                message.unlink()
+
+        return results
+
 
 class DiscordChannelCategory(models.Model):
     _name = "discord.channel.category"

@@ -47,7 +47,7 @@ class DiscordMessage(models.Model):
 
 
     def send(self):
-        url = self.env['ir.config_parameter'].sudo().get_param('discord_api_url') or 'https://discord.com/api'
+        url = self.env['ir.config_parameter'].sudo().get_param('discord_api_url') or 'https://discord.com/api/v9'
         url = url if url.endswith('/') else url + '/'
 
         # Send Message to a Channel

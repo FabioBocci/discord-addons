@@ -22,10 +22,10 @@
         <field name="model">discord.channel</field>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <form string="Discord Channel" create="false" edit="false">
-                <sheet> 
+            <form string="Discord Channel" create="false">
+                <sheet>
                     <div class="oe_button_box" name="button_box">
-                        
+
             <field name="active" invisible="1" />
             <widget
                 name="web_ribbon"
@@ -33,7 +33,7 @@
                 bg_color="bg-danger"
                 attrs="{'invisible': [('active', '=', True)]}"
             />
-            
+
                     </div>
                     <field name="id" invisible="True"/>
                     <div class="oe_title">
@@ -122,9 +122,9 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <form string="Channel Category" create="false" edit="false">
-                <sheet> 
+                <sheet>
                     <div class="oe_button_box" name="button_box">
-                        
+
             <field name="active" invisible="1" />
             <widget
                 name="web_ribbon"
@@ -132,7 +132,7 @@
                 bg_color="bg-danger"
                 attrs="{'invisible': [('active', '=', True)]}"
             />
-            
+
                     </div>
                     <field name="id" invisible="True"/>
                     <div class="oe_title">
